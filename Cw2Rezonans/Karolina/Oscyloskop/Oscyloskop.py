@@ -16,21 +16,31 @@ for NazwaPliku in files:
     Plik=open(NazwaPliku)
     #print DeltaT
     Dane=Plik.readlines()#[4:]
-    print Dane[2]
     DeltaT=float(Dane[2].split()[3].replace(",","."))
     Dane=Dane[5:]
     Plik.close()
-    Y=np.zeros(len(Dane))
-    for i in range(len(Dane)):
-        Y[i]=float(Dane[i].split()[2].replace(",","."))
-    X=np.zeros_like(Y)
+
+    M=2
+    print M
+    Ys=[np.zeros(len(Dane)) for i in range(M)]
+
+    for m in range(M):
+        #print Dane[i]
+        for i in range(len(Dane)):
+            try:
+                Ys[m][i]=float(Dane[i].split()[2+3*m].replace(",","."))
+            except:
+                print m, i, 2+2*m, len(Dane[i].split()), Dane[i].split()
+        #print i, Y[i]
+    X=np.zeros_like(Ys[0])
     for i in range(len(X)):
         X[i]=i*DeltaT
-
+               
     plt.title(u"Charakterystyka transmitacyjna\n"+NazwaPliku)
     plt.xlabel(u"Częstotliwość [kHz]")
     plt.ylabel(u"Wzmocnienie [dB]")
-    plt.plot(X,Y,"g-",label="Dane eksperymentalne")
+    for m in range(M):
+        plt.plot(X,Ys[m],label=m)
     #plt.xlim(10,20)
     plt.grid()
     plt.legend(loc=0)

@@ -28,12 +28,12 @@ for NazwaPliku in files:
     try:
         X2=DaneArray[:, 3]
         Y2=DaneArray[:, 4]
+        minx=min((min(X1), min(X2)))
+        maxx=max((max(X2), max(X1)))
     except:
         RobicDrugiWykres=False
-
-
-    minx=min((min(X1), min(X2)))
-    maxx=max((max(X2), max(X1)))
+        minx=min(X1)
+        maxx=max(X1)
 ##    
 ##    plt.title(u"Charakterystyka transmitancyjna\n" + NazwaPliku)
 ##    plt.xlabel(u"Częstotliwość f [Hz]")
