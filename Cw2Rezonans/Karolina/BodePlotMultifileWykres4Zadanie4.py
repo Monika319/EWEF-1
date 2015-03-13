@@ -26,9 +26,11 @@ Xsim2=Dane[3][:, 0]
 Ysim2=10**(Dane[3][:, 1]/20.)
 plt.plot(Xsim2, Ysim2, "-", label=u"30k Ω symulacja")
 
-
 minx=np.round((min((min(Xsim), min(Xex)))/10000))*10000
 maxx=np.round((max((max(Xsim), max(Xex)))/10000))*10000
+polowkowa=1/np.sqrt(2)#/33.
+plt.plot([minx, maxx], [polowkowa]*2, "--", label="Szerokość połówkowa")
+
 xticks=np.linspace(minx, maxx, 6)
 
 #plt.xscale('log')

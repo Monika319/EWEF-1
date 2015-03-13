@@ -31,6 +31,10 @@ minx=np.round((min((min(Xsim), min(Xex)))/10000))*10000
 maxx=np.round((max((max(Xsim), max(Xex)))/10000))*10000
 xticks=np.linspace(minx, maxx, 6)
 
+
+polowkowa=1/np.sqrt(2)/33.
+plt.plot([minx, maxx], [polowkowa]*2, "--", label=u"Szerokość połówkowa")
+
 #plt.xscale('log')
 #plt.yscale('log')
 plt.xlim(minx,maxx)
