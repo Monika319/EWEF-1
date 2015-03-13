@@ -9,22 +9,21 @@ from matplotlib.ticker import MultipleLocator, FormatStrFormatter, FixedLocator
 rc('font', family='Consolas')
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter, FixedLocator
 
-files = ["real_zad1_r30_Gaussed.dat","real_zad1_r30.dat"]
+files = ["real_zad7_r10k_Gaussed.dat","sim_zad7_r10k.dat"]
 Dane=[]
 for NazwaPliku in files:
     Dane.append(np.loadtxt(NazwaPliku))
 Xex=Dane[0][:, 0]
-Yex=10**(Dane[0][:, 1]/20.)/33.
+Yex=10**(Dane[0][:, 1]/20.)
 plt.plot(Xex, Yex, "o", label=u"Dane doświadczalne")
 Xsim=Dane[1][:, 0]
-Ysim=10**(Dane[1][:, 1]/20.)/33.
+Ysim=10**(Dane[1][:, 1]/20.)
 plt.plot(Xsim, Ysim, "-", label=u"Symulacja")
 
 
 minx=np.round((min((min(Xsim), min(Xex)))/10000))*10000
 maxx=np.round((max((max(Xsim), max(Xex)))/10000))*10000
 xticks=np.linspace(minx, maxx, 6)
-print (min((min(Xsim), min(Xex)))), minx, (max((max(Xsim), max(Xex)))), maxx, xticks
 
 #plt.xscale('log')
 #plt.yscale('log')
@@ -34,12 +33,12 @@ plt.axes().xaxis.set_major_formatter(FormatStrFormatter("%d"))
 ##plt.axes().xaxis.set_minor_locator(FixedLocator(xticks))
 plt.axes().xaxis.set_major_locator(FixedLocator(xticks))
 
-Opis=u"Wykres 1\nSzeregowy RLC\nOpornik 33 Ohm"
-Nazwa=u"Wykres 1"
+Opis=u"Wykres 5\nRównoległy RLC\nOpornik 10k Ω"
+Nazwa=u"Wykres5"
 
 plt.title(Opis)
 plt.xlabel(u"Częstotliwość f [Hz]")
-plt.ylabel(u"Natężenie prądu I [A]")
+plt.ylabel(u"Moduł napięcia wyjściowego |U| [V]")
 plt.grid(which='both')
 plt.legend(loc="best")
 plt.savefig(Nazwa +".png", bbox_inches='tight')
