@@ -1,0 +1,45 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import rc
+import os
+from matplotlib.ticker import MultipleLocator, FormatStrFormatter, FixedLocator
+
+rc('font', family='Consolas')
+from matplotlib.ticker import MultipleLocator, FormatStrFormatter, FixedLocator
+
+files = ["real_zad7_r30k_Gaussed.dat","sim_zad7_r30k.dat"]
+Dane=[]
+for NazwaPliku in files:
+    Dane.append(np.loadtxt(NazwaPliku))
+Xex=Dane[0][:, 0]
+Yex=10**(Dane[0][:, 1]/20.)
+plt.plot(Xex, Yex, "o", label=u"Dane doświadczalne")
+Xsim=Dane[1][:, 0]
+Ysim=10**(Dane[1][:, 1]/20.)
+plt.plot(Xsim, Ysim, "-", label=u"Symulacja")
+
+
+minx=np.round((min((min(Xsim), min(Xex)))/10000))*10000
+maxx=np.round((max((max(Xsim), max(Xex)))/10000))*10000
+xticks=np.linspace(minx, maxx, 6)
+
+#plt.xscale('log')
+#plt.yscale('log')
+plt.xlim(minx,maxx)
+plt.axes().xaxis.set_major_formatter(FormatStrFormatter("%d"))
+##plt.axes().xaxis.set_minor_formatter(FormatStrFormatter("%d"))
+##plt.axes().xaxis.set_minor_locator(FixedLocator(xticks))
+plt.axes().xaxis.set_major_locator(FixedLocator(xticks))
+
+Opis=u"Zadanie 5 wykres 3\nRównoległy RLC\nOpornik 30k Ω"
+Nazwa=u"Z5W3"
+
+plt.title(Opis)
+plt.xlabel(u"Częstotliwość f [Hz]")
+plt.ylabel(u"Moduł napięcia wyjściowego |U| [V]")
+plt.grid(which='both')
+plt.legend(loc="best")
+plt.savefig(Nazwa +".png", bbox_inches='tight')
+plt.show()

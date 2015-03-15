@@ -1,0 +1,12 @@
+10k dane
+
+f1=13322 Hz
+f2=15889 Hz
+B=2567 Hz
+Umax/sqrt(2)=0.707106781187
+
+f_0=1.455459100000000035e+04=14554,591 Hz #(takie same dla 10k jak i dla 30, prawda?)
+
+Q=f_0/B
+
+Q=5,669883522

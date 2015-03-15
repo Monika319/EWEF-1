@@ -9,7 +9,7 @@ import os
 from matplotlib import rc
 
 rc('font',family="Consolas")
-files=["real_zad9_1f.txt"]
+files=["real_zad9_05f.txt"]
 for NazwaPliku in files:
     print NazwaPliku
     Plik=open(NazwaPliku)
@@ -39,8 +39,8 @@ for NazwaPliku in files:
     w1= abs(np.fft.rfft(Ys[1]))
     #freqs = np.abs(np.fft.rfftfreq(len(Ys[1]))/DeltaT)
     freqs = np.fft.rfftfreq(len(Ys[1]))/DeltaT
-    Opis=u"Układ równoległy\nCzęstotliwośc rezonansowa"
-    Nazwa=u"Z9W1Fourier"
+    Opis=u"Układ równoległy\nPołowa częstotliwości rezonansowej"
+    Nazwa=u"Z9W2Fourier"
     plt.title(u"Transformata Fouriera sygnału wyjściowego\n"+Opis)
     plt.xlabel(u"Częstotliwość [Hz]")
     plt.ylabel(u"Amplituda")
