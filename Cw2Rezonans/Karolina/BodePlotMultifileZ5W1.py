@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import unicode_literals, division
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc
 import os
+import scipy.optimize
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter, FixedLocator
 
 rc('font', family='Consolas')
@@ -36,6 +37,49 @@ plt.plot([14007,14007], [0,Ysim_quality], "k--")
 plt.plot([15074,15074], [0,Ysim_quality], "k--")
 plt.plot([1.455459100000000035e+04,1.455459100000000035e+04], [0,max(Ysim)], "m--", label=u"f\0")
 xticks=np.linspace(minx, maxx, 6)
+
+##f0=14554.
+##def Lorentz(f, Q):
+##    return 1/np.sqrt(1+Q*Q*(f/f0 - f0/f)**2)
+##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
+##perr = np.sqrt(np.diag(pcov))
+##print "[Q]"
+##print popt
+##print perr
+##Xtheory=np.linspace(minx, maxx, 100000)
+##Ytheory=Lorentz(Xtheory, popt[0])
+##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
+##
+##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
+##perr = np.sqrt(np.diag(pcov))
+##print "[Q]"
+##print popt
+##print perr
+##Xtheory=np.linspace(minx, maxx, 100000)
+##Ytheory=Lorentz(Xtheory, popt[0])
+##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 2")
+
+f0=14554.
+def Lorentz(f, Q,A):
+    return A/np.sqrt(1+Q*Q*(f/f0 - f0/f)**2)
+popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
+perr = np.sqrt(np.diag(pcov))
+print "[Q\tA]"
+print popt
+print perr
+Xtheory=np.linspace(minx, maxx, 100000)
+Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
+
+popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
+perr = np.sqrt(np.diag(pcov))
+print "[Q\tA]"
+print popt
+print perr
+Xtheory=np.linspace(minx, maxx, 100000)
+Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
+
 
 #plt.xscale('log')
 #plt.yscale('log')

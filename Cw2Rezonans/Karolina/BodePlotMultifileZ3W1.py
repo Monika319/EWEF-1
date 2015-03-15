@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import unicode_literals, division
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc
+import scipy.optimize
 import os
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter, FixedLocator
 
@@ -10,20 +11,21 @@ rc('font', family='Consolas')
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter, FixedLocator
 
 files = ["real_zad1_r30_Gaussed.dat","sim_zad1_r30.dat","real_zad1_r130_Gaussed.dat", "sim_zad1_r130.dat"]
+
 Dane=[]
 for NazwaPliku in files:
     Dane.append(np.loadtxt(NazwaPliku))
 Xex=Dane[0][:, 0]
-Yex=10**(Dane[0][:, 1]/20.)/33.
+Yex=10**(Dane[0][:, 1]/20.)
 plt.plot(Xex, Yex, "o", label=u"33 Ω eksperyment")
 Xsim=Dane[1][:, 0]
-Ysim=10**(Dane[1][:, 1]/20.)/33.
+Ysim=10**(Dane[1][:, 1]/20.)
 plt.plot(Xsim, Ysim, "-", label=u"33 Ω symulacja")
 Xex2=Dane[2][:, 0]
-Yex2=10**(Dane[2][:, 1]/20.)/130.
+Yex2=10**(Dane[2][:, 1]/20.)
 plt.plot(Xex2, Yex2, "o", label=u"130 Ω eksperyment")
 Xsim2=Dane[3][:, 0]
-Ysim2=10**(Dane[3][:, 1]/20.)/130.
+Ysim2=10**(Dane[3][:, 1]/20.)
 plt.plot(Xsim2, Ysim2, "-", label=u"130 Ω symulacja")
 
 
@@ -31,13 +33,64 @@ minx=np.round((min((min(Xsim), min(Xex)))/10000))*10000
 maxx=np.round((max((max(Xsim), max(Xex)))/10000))*10000
 xticks=np.linspace(minx, maxx, 6)
 
+#WERSJA Z FITEM f0
+##def Lorentz(f, Q, f0,A):
+##    return A/np.sqrt(1+Q*Q*(f/f0 - f0/f)**2)
+##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
+##perr = np.sqrt(np.diag(pcov))
+##print "[Q\tf0\tA]"
+##print popt
+##print perr
+##Xtheory=np.linspace(minx, maxx, 100000)
+##Ytheory=Lorentz(Xtheory, popt[0], popt[1], popt[2])
+##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa")
 
-Ysim_quality=max(Ysim)/np.sqrt(2)
-Xsim_quality=[min(Xsim),max(Xsim)]
-plt.plot(Xsim_quality, [Ysim_quality,Ysim_quality], "b-.", label=u"Punkt 1/2 mocy sym.")
-plt.plot([14007,14007], [0,Ysim_quality], "k--")
-plt.plot([15074,15074], [0,Ysim_quality], "k--")
-plt.plot([1.455459100000000035e+04,1.455459100000000035e+04], [0,max(Ysim)], "m--", label=u"f\0")
+f0=14554.
+def Lorentz(f, Q, A):
+    return A/np.sqrt(1.+Q*Q*(f/f0 - f0/f)**2)
+popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
+perr = np.sqrt(np.diag(pcov))
+print "[Q\tA]"
+print 2*popt
+print perr
+Xtheory=np.linspace(minx, maxx, 100000)
+Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
+
+popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
+perr = np.sqrt(np.diag(pcov))
+print "[Q\tA]"
+print 2*popt
+print perr
+Xtheory=np.linspace(minx, maxx, 100000)
+Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 2")
+
+
+
+##YsimQfactor=np.ones_like(Yex)*max(Yex)/np.sqrt(2)
+##Ysimf2=14689.
+##Ysimf1=14421.
+##B=Ysimf2-Ysimf1
+##print B
+##Q=f0/B
+##print Q
+##print np.abs(Ysim-YsimQfactor)
+##plt.plot(Xsim, np.abs(Ysim-YsimQfactor))
+##plt.show()
+
+
+
+##plt.plot(Xex, YsimQfactor, "-.")
+##Ysim2Qfactor=np.ones_like(Ysim2)*max(Ysim2)/np.sqrt(2)
+##plt.plot(Xsim2, Ysim2Qfactor, "-.")
+##Ysim_quality=max(Ysim)/np.sqrt(2)
+##Xsim_quality=[min(Xsim),max(Xsim)]
+##plt.plot(Xsim_quality, [Ysim_quality,Ysim_quality], "b-.", label=u"Punkt 1/2 mocy sym.")
+##plt.plot([14007,14007], [0,Ysim_quality], "k--")
+##plt.plot([15074,15074], [0,Ysim_quality], "k--")
+##plt.plot([1.455459100000000035e+04,1.455459100000000035e+04], [0,max(Ysim)], "m--", label=u"f\0")
+
 xticks=np.linspace(minx, maxx, 6)
 
 #plt.xscale('log')

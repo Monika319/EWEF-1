@@ -35,7 +35,8 @@ for NazwaPliku in files:
     for i in range(len(X)):
         X[i]=i*DeltaT
 
-
+    for y in Ys:
+        print max(y)-min(y)
     Opis=u"Układ równoległy\nJedna trzecia częstotliwości rezonansowej"
     Nazwa=u"Z9W3"
     plt.title(u"Przebieg napięciowy\n"+Opis)

@@ -9,8 +9,9 @@ import os
 from matplotlib import rc
 
 rc('font',family="Consolas")
-files=["real_zad9_05f.txt"]
-for NazwaPliku in files:
+files=["real_zad5_1f.txt", "real_zad5_05f_p2.txt", "real_zad5_033f.txt", "real_zad9_1f.txt", "real_zad9_05f.txt", "real_zad9_033f.txt"]
+dane=np.zeros((len(files), 2))
+for FileIndex, NazwaPliku in enumerate(files):
     print NazwaPliku
     Plik=open(NazwaPliku)
     #print DeltaT
@@ -21,7 +22,6 @@ for NazwaPliku in files:
     Dane=Dane[5:]
     Plik.close()
 
-    print M
     Ys=[np.zeros(len(Dane)) for i in range(M)]
 
     for m in range(M):
@@ -31,23 +31,18 @@ for NazwaPliku in files:
             except:
                 print m, i, 2+3*m, len(Dane[i].split()), Dane[i].split()
         #print i, Y[i]
-    X=np.zeros_like(Ys[0])
-    for i in range(len(X)):
-        X[i]=i*DeltaT
 
-    for y in Ys:
-        print max(y)-min(y)
-    Opis=u"Układ równoległy\nPołowa częstotliwości rezonansowej"
-    Nazwa=u"Z9W2"
-    plt.title(u"Przebieg napięciowy\n"+Opis)
-    plt.xlabel(u"Czas t [s]")
-    plt.ylabel(u"Napięcie [V]")
-    plt.plot(X,Ys[0],label=u"Wejście")
-    plt.plot(X,Ys[1],label=u"Wyjście")
-    plt.grid()
-    plt.legend(loc="best")
-    plt.savefig(Nazwa + ".png", bbox_inches='tight')
-    plt.show()
-
-
-
+    print max(Ys[0])-min(Ys[0])
+    dane[FileIndex, 0] = max(Ys[0])-min(Ys[0])
+    print max(Ys[1])-min(Ys[1])
+    dane[FileIndex, 1] = max(Ys[1])-min(Ys[1])
+print dane
+print "szeregowy"
+stosunkiszeregowy=dane[1:3,1]/dane[0,1]
+print stosunkiszeregowy
+stosunkiteor=np.array([0, 1/3.])
+print stosunkiszeregowy-stosunkiteor
+print "rownolegly"
+stosunkirownolegly=dane[4:6,1]/dane[3,1]
+print stosunkirownolegly
+print stosunkirownolegly-stosunkiteor
