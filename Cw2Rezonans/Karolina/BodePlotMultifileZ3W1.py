@@ -16,16 +16,16 @@ Dane=[]
 for NazwaPliku in files:
     Dane.append(np.loadtxt(NazwaPliku))
 Xex=Dane[0][:, 0]
-Yex=10**(Dane[0][:, 1]/20.)
+Yex=10**(Dane[0][:, 1]/20.)/33.
 plt.plot(Xex, Yex, "o", label=u"33 Ω eksperyment")
 Xsim=Dane[1][:, 0]
-Ysim=10**(Dane[1][:, 1]/20.)
+Ysim=10**(Dane[1][:, 1]/20.)/33.
 plt.plot(Xsim, Ysim, "-", label=u"33 Ω symulacja")
 Xex2=Dane[2][:, 0]
-Yex2=10**(Dane[2][:, 1]/20.)
+Yex2=10**(Dane[2][:, 1]/20.)/130.
 plt.plot(Xex2, Yex2, "o", label=u"130 Ω eksperyment")
 Xsim2=Dane[3][:, 0]
-Ysim2=10**(Dane[3][:, 1]/20.)
+Ysim2=10**(Dane[3][:, 1]/20.)/130.
 plt.plot(Xsim2, Ysim2, "-", label=u"130 Ω symulacja")
 
 
@@ -45,26 +45,26 @@ xticks=np.linspace(minx, maxx, 6)
 ##Ytheory=Lorentz(Xtheory, popt[0], popt[1], popt[2])
 ##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa")
 
-f0=14554.
-def Lorentz(f, Q, A):
-    return A/np.sqrt(1.+Q*Q*(f/f0 - f0/f)**2)
-popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
-perr = np.sqrt(np.diag(pcov))
-print "[Q\tA]"
-print 2*popt
-print perr
-Xtheory=np.linspace(minx, maxx, 100000)
-Ytheory=Lorentz(Xtheory, popt[0], popt[1])
-plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
-
-popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
-perr = np.sqrt(np.diag(pcov))
-print "[Q\tA]"
-print 2*popt
-print perr
-Xtheory=np.linspace(minx, maxx, 100000)
-Ytheory=Lorentz(Xtheory, popt[0], popt[1])
-plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 2")
+##f0=14554.
+##def Lorentz(f, Q, A):
+##    return A/np.sqrt(1.+Q*Q*(f/f0 - f0/f)**2)
+##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
+##perr = np.sqrt(np.diag(pcov))
+##print "[Q\tA]"
+##print 2*popt
+##print perr
+##Xtheory=np.linspace(minx, maxx, 100000)
+##Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
+##
+##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
+##perr = np.sqrt(np.diag(pcov))
+##print "[Q\tA]"
+##print 2*popt
+##print perr
+##Xtheory=np.linspace(minx, maxx, 100000)
+##Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 2")
 
 
 
@@ -101,8 +101,8 @@ plt.axes().xaxis.set_major_formatter(FormatStrFormatter("%d"))
 ##plt.axes().xaxis.set_minor_locator(FixedLocator(xticks))
 plt.axes().xaxis.set_major_locator(FixedLocator(xticks))
 
-Opis=u"Zadanie 3 wykres 1\nSzeregowy RLC"
-Nazwa=u"Z3W1"
+Opis=u"Wykres 3\nSzeregowy RLC"
+Nazwa=u"Z3W1as"
 
 plt.title(Opis)
 plt.xlabel(u"Częstotliwość f [Hz]")

@@ -62,7 +62,7 @@ plt.xlim(minx,maxx)
 plt.axes().xaxis.set_major_formatter(FormatStrFormatter("%d"))
 plt.axes().xaxis.set_major_locator(FixedLocator(xticks))
 
-Opis=u"Wykres 1\nSzeregowy RLC\nOpornik 133 Ohm"
+Opis=u"Wykres 2\nSzeregowy RLC\nOpornik 130 Ohm"
 Nazwa=u"Wykres 2"
 
 plt.title(Opis)
