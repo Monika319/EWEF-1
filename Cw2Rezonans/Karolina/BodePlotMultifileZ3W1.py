@@ -51,9 +51,9 @@ def Lorentz(f, Q, A):
     return A/np.sqrt(1.+Q*Q*(f/f0 - f0/f)**2)
 popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
 perr = np.sqrt(np.diag(pcov))
-print "[Q]"
-print popt[0]
-print perr[0]
+print "[Q\tA]"
+print popt
+print perr
 Xtheory=np.linspace(minx, maxx, 100000)
 Ytheory=Lorentz(Xtheory, popt[0], popt[1])
 plt.plot(Xtheory, Ytheory, "-", label=u"33 Ω fit Q=%.1f"%popt[0])
@@ -71,9 +71,9 @@ YsimQfactor=np.ones_like(Xtheory)*max(Ytheory)/np.sqrt(2)
 
 popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
 perr = np.sqrt(np.diag(pcov))
-print "[Q]"
-print popt[0]
-print perr[0]
+print "[Q\tA]"
+print popt
+print perr
 Xtheory=np.linspace(minx, maxx, 100000)
 Ytheory=Lorentz(Xtheory, popt[0], popt[1])
 plt.plot(Xtheory, Ytheory, "-", label=u"130 Ω fit Q=%.1f"%popt[0])

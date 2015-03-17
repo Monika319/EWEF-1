@@ -17,8 +17,8 @@ dL=2*dw0/w0/w0/C
 print "L:", L, "+-", dL
 print "\n\n"
 
-Rg=0
-#wstawiasz opory i szerokości połówkowe B
+Rg=0 #wtórnik
+#wstawiasz opory, dobroci i ich błędy
 dane=[(33., 2.64481617e+01, 3.09522850e-01), (130., 1.06914663e+01, 1.51164595e-01)]
 for R, Q, dQ in dane:
     print "R:", R
