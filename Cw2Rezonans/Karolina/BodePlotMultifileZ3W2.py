@@ -33,7 +33,7 @@ plt.axes().xaxis.set_major_formatter(FormatStrFormatter("%d"))
 ##plt.axes().xaxis.set_minor_locator(FixedLocator(xticks))
 plt.axes().xaxis.set_major_locator(FixedLocator(xticks))
 
-Opis=u"Zadanie 3 wykres 2\nSzeregowy RLC\nOpornik 33 Ω"
+Opis=u"Wykres 2\nSzeregowy RLC\nOpornik 33 Ω"
 Nazwa=u"Z3W2"
 
 plt.title(Opis)

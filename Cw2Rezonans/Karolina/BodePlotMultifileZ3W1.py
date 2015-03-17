@@ -45,30 +45,41 @@ xticks=np.linspace(minx, maxx, 6)
 ##Ytheory=Lorentz(Xtheory, popt[0], popt[1], popt[2])
 ##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa")
 
-##f0=14554.
-##def Lorentz(f, Q, A):
-##    return A/np.sqrt(1.+Q*Q*(f/f0 - f0/f)**2)
-##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
-##perr = np.sqrt(np.diag(pcov))
-##print "[Q\tA]"
-##print 2*popt
-##print perr
-##Xtheory=np.linspace(minx, maxx, 100000)
-##Ytheory=Lorentz(Xtheory, popt[0], popt[1])
-##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
-##
-##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
-##perr = np.sqrt(np.diag(pcov))
-##print "[Q\tA]"
-##print 2*popt
-##print perr
-##Xtheory=np.linspace(minx, maxx, 100000)
-##Ytheory=Lorentz(Xtheory, popt[0], popt[1])
-##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 2")
+f0=14550.
+
+def Lorentz(f, Q, A):
+    return A/np.sqrt(1.+Q*Q*(f/f0 - f0/f)**2)
+popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
+perr = np.sqrt(np.diag(pcov))
+print "[Q]"
+print popt[0]
+print perr[0]
+Xtheory=np.linspace(minx, maxx, 100000)
+Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+plt.plot(Xtheory, Ytheory, "-", label=u"33 Ω fit Q=%.1f"%popt[0])
+
+YsimQfactor=np.ones_like(Xtheory)*max(Ytheory)/np.sqrt(2)
+##Ysimf2=14689.
+##Ysimf1=14421.
+##B=Ysimf2-Ysimf1
+##print B
+##Q=f0/B
+##print Q
+##print np.abs(Ysim-YsimQfactor)
+##plt.plot(Xsim, np.abs(Ysim-YsimQfactor))
+##plt.show()
+
+popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
+perr = np.sqrt(np.diag(pcov))
+print "[Q]"
+print popt[0]
+print perr[0]
+Xtheory=np.linspace(minx, maxx, 100000)
+Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+plt.plot(Xtheory, Ytheory, "-", label=u"130 Ω fit Q=%.1f"%popt[0])
 
 
 
-##YsimQfactor=np.ones_like(Yex)*max(Yex)/np.sqrt(2)
 ##Ysimf2=14689.
 ##Ysimf1=14421.
 ##B=Ysimf2-Ysimf1
@@ -101,8 +112,8 @@ plt.axes().xaxis.set_major_formatter(FormatStrFormatter("%d"))
 ##plt.axes().xaxis.set_minor_locator(FixedLocator(xticks))
 plt.axes().xaxis.set_major_locator(FixedLocator(xticks))
 
-Opis=u"Wykres 3\nSzeregowy RLC"
-Nazwa=u"Z3W1as"
+Opis=u"Wykres 1\nSzeregowy RLC"
+Nazwa=u"Z3W1"
 
 plt.title(Opis)
 plt.xlabel(u"Częstotliwość f [Hz]")

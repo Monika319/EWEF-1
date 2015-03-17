@@ -38,48 +38,38 @@ maxx=np.round((max((max(Xsim), max(Xex)))/10000))*10000
 ##plt.plot([1.455459100000000035e+04,1.455459100000000035e+04], [0,max(Ysim)], "m--", label=u"f\0")
 xticks=np.linspace(minx, maxx, 6)
 
-##f0=14554.
-##def Lorentz(f, Q):
-##    return 1/np.sqrt(1+Q*Q*(f/f0 - f0/f)**2)
-##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
-##perr = np.sqrt(np.diag(pcov))
-##print "[Q]"
-##print popt
-##print perr
-##Xtheory=np.linspace(minx, maxx, 100000)
-##Ytheory=Lorentz(Xtheory, popt[0])
-##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
-##
-##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
-##perr = np.sqrt(np.diag(pcov))
-##print "[Q]"
-##print popt
-##print perr
-##Xtheory=np.linspace(minx, maxx, 100000)
-##Ytheory=Lorentz(Xtheory, popt[0])
-##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 2")
+f0=14550.
 
-##f0=14554.
-##def Lorentz(f, Q,A):
-##    return A/np.sqrt(1+Q*Q*(f/f0 - f0/f)**2)
-##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
-##perr = np.sqrt(np.diag(pcov))
-##print "[Q\tA]"
-##print popt
-##print perr
-##Xtheory=np.linspace(minx, maxx, 100000)
-##Ytheory=Lorentz(Xtheory, popt[0], popt[1])
-##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
-##
-##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
-##perr = np.sqrt(np.diag(pcov))
-##print "[Q\tA]"
-##print popt
-##print perr
-##Xtheory=np.linspace(minx, maxx, 100000)
-##Ytheory=Lorentz(Xtheory, popt[0], popt[1])
-##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
-##
+def Lorentz(f, Q, A):
+    return A/np.sqrt(1.+Q*Q*(f/f0 - f0/f)**2)
+popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
+perr = np.sqrt(np.diag(pcov))
+print "[Q]"
+print popt[0]
+print perr[0]
+Xtheory=np.linspace(minx, maxx, 100000)
+Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+plt.plot(Xtheory, Ytheory, "-", label=u"10k Ω fit Q=%.1f"%popt[0])
+
+YsimQfactor=np.ones_like(Xtheory)*max(Ytheory)/np.sqrt(2)
+##Ysimf2=14689.
+##Ysimf1=14421.
+##B=Ysimf2-Ysimf1
+##print B
+##Q=f0/B
+##print Q
+##print np.abs(Ysim-YsimQfactor)
+##plt.plot(Xsim, np.abs(Ysim-YsimQfactor))
+##plt.show()
+
+popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
+perr = np.sqrt(np.diag(pcov))
+print "[Q]"
+print popt[0]
+print perr[0]
+Xtheory=np.linspace(minx, maxx, 100000)
+Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+plt.plot(Xtheory, Ytheory, "-", label=u"30k Ω fit Q=%.1f"%popt[0])
 
 #plt.xscale('log')
 #plt.yscale('log')
@@ -88,9 +78,10 @@ plt.axes().xaxis.set_major_formatter(FormatStrFormatter("%d"))
 ##plt.axes().xaxis.set_minor_formatter(FormatStrFormatter("%d"))
 ##plt.axes().xaxis.set_minor_locator(FixedLocator(xticks))
 plt.axes().xaxis.set_major_locator(FixedLocator(xticks))
+plt.ylim(0, 1.2)
 
 Opis=u"Wykres 5\nRównoległy RLC"
-Nazwa=u"Z5W1ad"
+Nazwa=u"Z5W1"
 
 plt.title(Opis)
 plt.xlabel(u"Częstotliwość f [Hz]")
