@@ -30,12 +30,12 @@ plt.plot(Xsim2, Ysim2, "-", label=u"30k Ω symulacja")
 minx=np.round((min((min(Xsim), min(Xex)))/10000))*10000
 maxx=np.round((max((max(Xsim), max(Xex)))/10000))*10000
 
-Ysim_quality=max(Ysim)/np.sqrt(2)
-Xsim_quality=[min(Xsim),max(Xsim)]
-plt.plot(Xsim_quality, [Ysim_quality,Ysim_quality], "b-.", label=u"Punkt 1/2 mocy sym.")
-plt.plot([14007,14007], [0,Ysim_quality], "k--")
-plt.plot([15074,15074], [0,Ysim_quality], "k--")
-plt.plot([1.455459100000000035e+04,1.455459100000000035e+04], [0,max(Ysim)], "m--", label=u"f\0")
+##Ysim_quality=max(Ysim)/np.sqrt(2)
+##Xsim_quality=[min(Xsim),max(Xsim)]
+##plt.plot(Xsim_quality, [Ysim_quality,Ysim_quality], "b-.", label=u"Punkt 1/2 mocy sym.")
+##plt.plot([14007,14007], [0,Ysim_quality], "k--")
+##plt.plot([15074,15074], [0,Ysim_quality], "k--")
+##plt.plot([1.455459100000000035e+04,1.455459100000000035e+04], [0,max(Ysim)], "m--", label=u"f\0")
 xticks=np.linspace(minx, maxx, 6)
 
 ##f0=14554.
@@ -59,27 +59,27 @@ xticks=np.linspace(minx, maxx, 6)
 ##Ytheory=Lorentz(Xtheory, popt[0])
 ##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 2")
 
-f0=14554.
-def Lorentz(f, Q,A):
-    return A/np.sqrt(1+Q*Q*(f/f0 - f0/f)**2)
-popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
-perr = np.sqrt(np.diag(pcov))
-print "[Q\tA]"
-print popt
-print perr
-Xtheory=np.linspace(minx, maxx, 100000)
-Ytheory=Lorentz(Xtheory, popt[0], popt[1])
-plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
-
-popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
-perr = np.sqrt(np.diag(pcov))
-print "[Q\tA]"
-print popt
-print perr
-Xtheory=np.linspace(minx, maxx, 100000)
-Ytheory=Lorentz(Xtheory, popt[0], popt[1])
-plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
-
+##f0=14554.
+##def Lorentz(f, Q,A):
+##    return A/np.sqrt(1+Q*Q*(f/f0 - f0/f)**2)
+##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex, Yex)
+##perr = np.sqrt(np.diag(pcov))
+##print "[Q\tA]"
+##print popt
+##print perr
+##Xtheory=np.linspace(minx, maxx, 100000)
+##Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
+##
+##popt, pcov = scipy.optimize.curve_fit(Lorentz, Xex2, Yex2)
+##perr = np.sqrt(np.diag(pcov))
+##print "[Q\tA]"
+##print popt
+##print perr
+##Xtheory=np.linspace(minx, maxx, 100000)
+##Ytheory=Lorentz(Xtheory, popt[0], popt[1])
+##plt.plot(Xtheory, Ytheory, "-", label=u"Dofitowana krzywa 1")
+##
 
 #plt.xscale('log')
 #plt.yscale('log')
@@ -89,8 +89,8 @@ plt.axes().xaxis.set_major_formatter(FormatStrFormatter("%d"))
 ##plt.axes().xaxis.set_minor_locator(FixedLocator(xticks))
 plt.axes().xaxis.set_major_locator(FixedLocator(xticks))
 
-Opis=u"Zadanie 5 wykres 1\nRównoległy RLC"
-Nazwa=u"Z5W1"
+Opis=u"Wykres 5\nRównoległy RLC"
+Nazwa=u"Z5W1ad"
 
 plt.title(Opis)
 plt.xlabel(u"Częstotliwość f [Hz]")

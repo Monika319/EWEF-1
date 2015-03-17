@@ -62,8 +62,8 @@ plt.xlim(minx,maxx)
 plt.axes().xaxis.set_major_formatter(FormatStrFormatter("%d"))
 plt.axes().xaxis.set_major_locator(FixedLocator(xticks))
 
-Opis=u"Wykres 3\nRównoległy RLC\nOpornik 30 kOhm"
-Nazwa=u"Wykres 3"
+Opis=u"Wykres 4\nRównoległy RLC\nOpornik 30 kOhm"
+Nazwa=u"Wykres 4ad"
 
 plt.title(Opis)
 plt.xlabel(u"Częstotliwość f [Hz]")
