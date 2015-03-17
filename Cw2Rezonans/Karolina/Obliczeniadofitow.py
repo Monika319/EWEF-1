@@ -13,7 +13,7 @@ df = 50 #(błąd odczytu częstotliwości do B)
 dB = sqrt(2)*df
 
 L=1/w0/w0/C
-dL=2*dw0/w0/w0/C
+dL=2*dw0/w0/w0/f0/C
 print "L:", L, "+-", dL
 print "\n\n"
 
