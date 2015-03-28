@@ -1,0 +1,28 @@
+Zadanie dodatkowe - przeliczenie skali z czasowej na czêstotliwoœciow¹
+	Na³o¿enie charakterystyki czêstotliwoœciowej
+	Przefourierzenie sygna³u wejœciowego.
+		Konwolucja z transmitancj¹
+			Odwrotna transformata
+				Porównanie z sygna³em wejœciowym?
+				Porównanie samych transformat?
+*KRÓTKI* opis projektu
+	Charakterystyka czasowa impulsowa
+	Charakterystyka czasowa skokowa
+	Charakterystyka czêstotliwoœciowa
+	Wyliczone wzory z liczbowymi wartoœciami
+Oscyloskop
+	Na³o¿enie teoretycznych wzorów
+		Przesun¹æ czasowo do koñca peaku, (t-0.0001)
+Czas trwania i amplituda pobudzenia impulsowego w eksperymencie
+	Mo¿e by dofitowaæ
+Amplituda skoku jednostkowego
+	Te¿ mo¿na by dofitowaæ
+Czêstotliwoœæ charakterystyczna
+	Zdecydowanie mo¿naby dofitowaæ
+	Sprawdziæ w Goldsteinie czy na to nie by³o wzorów (driven damped pendulum)
+Wyznaczenie wspó³czynnika t³umienia dla obu czasowych
+	Dofitowanie eksponensa do wierzcho³ków? A mo¿e ogólnie dofitowaæ jedn¹ wielk¹ krzyw¹?
+	Porównanie z teoretyczn¹ (exp^-TOJESTTO*t sin...)
+Dyskusja miêdzy wszystkimi tymi rzeczami
+	Teoria chyba siê zgadza z symulacj¹ ale trzeba na³o¿yæ wzory na oscyloskopy
+	ród³a ró¿nic amplitudowych i czasowych?
